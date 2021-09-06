@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { ExpandMore } from "@material-ui/icons";
 import {
-  Button,
   Card,
   CardHeader,
   IconButton,
@@ -9,9 +9,11 @@ import {
   CardContent,
   CardActions,
 } from "@material-ui/core";
-import { useState } from "react";
-import useStyles from "./task-board-card.styles";
+
 import { Task } from "../../task-board-types";
+import { LinkButton } from "../../../../shared/ui/link-bottom/link-button";
+
+import useStyles from "./task-board-card.styles";
 
 export interface TaskBoardCardPrpos {
   task: Task;
@@ -41,8 +43,8 @@ export default function TaskBoardCard(props: TaskBoardCardPrpos) {
           <Typography variant="body1">{props.task.description}</Typography>
         </CardContent>
         <CardActions>
-          <Button>Delete</Button>
-          <Button>Edit</Button>
+          <LinkButton to={`/delete-task/${props.task.id}`}>Delete</LinkButton>
+          <LinkButton to={`/edit-task/${props.task.id}`}>Edit</LinkButton>
         </CardActions>
       </Collapse>
     </Card>

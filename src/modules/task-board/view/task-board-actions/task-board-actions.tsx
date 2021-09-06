@@ -1,25 +1,19 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  Container,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
+import { AppBar, Box, Container, Toolbar, Typography } from "@material-ui/core";
 
 import ExpandToggle from "../expand-toggle/expand-toggle";
 import PriorityFilter from "../priority-filter/priority-filter";
 
 import useStyles from "./task-board-actions.styles";
+import { LinkButton } from "../../../../shared/ui/link-bottom/link-button";
 
 export default function TaskBoardActions() {
-  const styles = useStyles();
+  const classes = useStyles();
 
   return (
-    <AppBar position="relative" className={styles.appBar}>
+    <AppBar position="relative" className={classes.appBar}>
       <Container>
-        <Toolbar className={styles.toolbar}>
-          <Typography variant="h6" className={styles.label}>
+        <Toolbar className={classes.toolbar}>
+          <Typography variant="h6" className={classes.label}>
             Task Board
           </Typography>
 
@@ -29,9 +23,9 @@ export default function TaskBoardActions() {
             <ExpandToggle />
           </Box>
 
-          <Button size="small" variant="contained">
+          <LinkButton size="small" variant="contained" to="/create-task">
             Create Task
-          </Button>
+          </LinkButton>
         </Toolbar>
       </Container>
     </AppBar>
