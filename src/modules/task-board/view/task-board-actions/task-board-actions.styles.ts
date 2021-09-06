@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
   label: {
     flexGrow: 1,
-    fontWeight: theme.typography.fontWeightBold,
+    textDecoration: "none",
   },
 }));
 

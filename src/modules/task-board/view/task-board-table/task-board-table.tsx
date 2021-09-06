@@ -1,6 +1,6 @@
 import { Container, Grid } from "@material-ui/core";
-import generateId from "../../../../shared/utils";
 
+import generateId from "../../../../shared/utils";
 import { Task, TaskProgress } from "../../task-board-types";
 import TaskBoardColumn from "../task-board-column/task-board-column";
 
@@ -37,7 +37,7 @@ export default function TaskBoardTable() {
     <Container maxWidth="lg">
       <Grid container spacing={2}>
         {taskProgressList.map(({ label, progress }) => (
-          <TaskBoardColumn label={label} tasks={tasks} />
+          <TaskBoardColumn key={progress} label={label} tasks={tasks} />
         ))}
       </Grid>
     </Container>
