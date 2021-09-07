@@ -6,13 +6,7 @@ export interface TaskBoardStateFilters {
 }
 
 export interface TaskBoardState {
-  data: {
-    [taskId: string]: Task;
-  };
-  meta: {
-    expanded: boolean;
-    filters: TaskBoardStateFilters;
-  };
+  [taskId: string]: Task;
 }
 
 export type CreateTaskPayload = Pick<

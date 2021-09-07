@@ -1,13 +1,7 @@
 import generateId from "../../../shared/utils";
 import { TaskBoardState, TaskBoardStateAction } from "./task-board-state-types";
 
-export const initialState: TaskBoardState = {
-  data: {},
-  meta: {
-    expanded: false,
-    filters: {},
-  },
-};
+export const initialState: TaskBoardState = {};
 
 export default function taskBoardStateReducer(
   state = initialState,
@@ -29,14 +23,14 @@ export default function taskBoardStateReducer(
 
       return {
         ...state,
-        [id]: { ...state.data[id], ...restPayload, updatedAt: Date.now() },
+        [id]: { ...state[id], ...restPayload, updatedAt: Date.now() },
       };
     }
 
     case "delete": {
       const newState = { ...state };
 
-      delete newState.data[action.payload];
+      delete newState[action.payload];
 
       return newState;
     }

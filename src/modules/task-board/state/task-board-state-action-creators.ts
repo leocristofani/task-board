@@ -1,8 +1,7 @@
 import {
+  UpdateTaskPayload,
   CreateTaskPayload,
   TaskBoardStateAction,
-  TaskBoardStateFilters,
-  UpdateTaskPayload,
 } from "./task-board-state-types";
 
 const makeTaskBoardStateActionCreators = (
@@ -13,11 +12,6 @@ const makeTaskBoardStateActionCreators = (
   update: (payload: UpdateTaskPayload) => dispatch({ type: "update", payload }),
 
   delete: (taskId: string) => dispatch({ type: "delete", payload: taskId }),
-
-  setFilters: (payload: TaskBoardStateFilters) =>
-    dispatch({ type: "filter", payload }),
-
-  toggleExpanded: () => dispatch({ type: "toggleExpanded" }),
 });
 
 export default makeTaskBoardStateActionCreators;

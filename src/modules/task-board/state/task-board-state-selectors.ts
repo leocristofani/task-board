@@ -23,11 +23,7 @@ const makeTaskBoardStateSelectors = (state: TaskBoardState) => ({
         return a.createdAt > b.createdAt ? 1 : -1;
       }),
 
-  getOne: (taskId: string) => state.data[taskId],
-
-  getExpanded: () => state.meta.expanded,
-
-  getFilters: () => state.meta.filters,
+  getOne: (taskId: string) => state[taskId],
 });
 
 export default makeTaskBoardStateSelectors;

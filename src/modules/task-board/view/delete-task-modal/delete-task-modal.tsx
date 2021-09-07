@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import {
   Button,
   Dialog,
@@ -8,12 +8,21 @@ import {
   DialogTitle,
 } from "@material-ui/core";
 
+import useTaskBoardState from "../../state/use-task-board-state";
+import TaskNotFoundModal from "../task-not-found-modal/task-not-found-modal";
+
 export default function DeleteTaskModal() {
   const history = useHistory();
+  const params = useParams<{ taskId: string }>();
 
   const handleClose = () => {
     history.goBack();
   };
+
+  const taskBoardState = useTaskBoardState();
+  const task = taskBoardState.getOne(params.taskId);
+
+  if (!task) return <TaskNotFoundModal taskId={params.taskId} />;
 
   return (
     <Dialog

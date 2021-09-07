@@ -3,9 +3,9 @@ import React, { useReducer } from "react";
 import taskBoardStateReducer, {
   initialState,
 } from "./task-board-state-reducer";
+import { TaskBoardStateAction } from "./task-board-state-types";
 import makeTaskBoardStateSelectors from "./task-board-state-selectors";
 import makeTaskBoardStateActionCreators from "./task-board-state-action-creators";
-import { TaskBoardStateAction } from "./task-board-state-types";
 
 const initialValue = {
   ...makeTaskBoardStateSelectors(initialState),
