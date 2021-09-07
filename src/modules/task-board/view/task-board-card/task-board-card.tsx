@@ -31,27 +31,23 @@ export default function TaskBoardCard(props: TaskBoardCardPrpos) {
   return (
     <Card className={classes.root}>
       <CardHeader
+        className={classes.header}
+        onClick={toggleExpanded}
         title={<Typography variant="body1">{props.task.title}</Typography>}
         action={
-          <IconButton aria-label="open" onClick={toggleExpanded}>
+          <IconButton aria-label="open">
             <ExpandMore />
           </IconButton>
         }
       />
       <Collapse in={expanded}>
-        {expanded ? (
-          <>
-            <CardContent className={classes.content}>
-              <Typography variant="body1">{props.task.description}</Typography>
-            </CardContent>
-            <CardActions>
-              <LinkButton to={`/delete-task/${props.task.id}`}>
-                Delete
-              </LinkButton>
-              <LinkButton to={`/edit-task/${props.task.id}`}>Edit</LinkButton>
-            </CardActions>
-          </>
-        ) : null}
+        <CardContent className={classes.content}>
+          <Typography variant="body1">{props.task.description}</Typography>
+        </CardContent>
+        <CardActions>
+          <LinkButton to={`/delete-task/${props.task.id}`}>Delete</LinkButton>
+          <LinkButton to={`/edit-task/${props.task.id}`}>Edit</LinkButton>
+        </CardActions>
       </Collapse>
     </Card>
   );

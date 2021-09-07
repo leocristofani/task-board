@@ -12,6 +12,10 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     textDecoration: "none",
   },
+  createTaskButton: {
+    color: theme.palette.primary.main,
+    backgroundColor: theme.palette.common.white,
+  },
 }));
 
 export default useStyles;

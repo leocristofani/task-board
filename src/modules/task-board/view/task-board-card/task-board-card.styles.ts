@@ -9,6 +9,10 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 0,
     paddingBottom: 0,
   },
+
+  header: {
+    cursor: "pointer",
+  },
 }));
 
 export default useStyles;

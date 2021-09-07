@@ -23,17 +23,30 @@ export default function PriorityFilter() {
       control={
         <Box ml={1}>
           <ButtonGroup size="small" color="inherit" variant="outlined">
-            {taskPriorityList.map(({ priority, label }) => (
-              <LinkButton
-                key={priority}
-                to={url.withParam("priority", priority)}
-                className={
-                  url.hasParam("priority", priority) ? classes.active : ""
-                }
-              >
-                {label}
-              </LinkButton>
-            ))}
+            {taskPriorityList.map(({ priority, label }) => {
+              const isSelected = url.hasParam("priority", priority);
+
+              return (
+                <LinkButton
+                  key={priority}
+                  to={
+                    isSelected
+                      ? url.withoutParam("priority")
+                      : url.withParam("priority", priority)
+                  }
+                  classes={
+                    isSelected
+                      ? {
+                          root: classes.activeButtonRoot,
+                          label: classes.activeButtonLabel,
+                        }
+                      : {}
+                  }
+                >
+                  {label}
+                </LinkButton>
+              );
+            })}
           </ButtonGroup>
         </Box>
       }

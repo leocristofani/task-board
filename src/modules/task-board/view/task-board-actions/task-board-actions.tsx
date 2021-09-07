@@ -30,7 +30,12 @@ export default function TaskBoardActions() {
             <PriorityFilter />
           </Box>
 
-          <LinkButton size="small" variant="contained" to="/create-task">
+          <LinkButton
+            className={classes.createTaskButton}
+            size="small"
+            variant="contained"
+            to="/create-task"
+          >
             Create Task
           </LinkButton>
         </Toolbar>

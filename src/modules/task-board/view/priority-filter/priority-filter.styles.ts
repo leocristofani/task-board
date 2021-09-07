@@ -1,8 +1,14 @@
 import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles(() => ({
-  active: {
-    opacity: 0.75,
+const useStyles = makeStyles((theme) => ({
+  activeButtonRoot: {
+    backgroundColor: theme.palette.common.white,
+    "&:hover": {
+      backgroundColor: theme.palette.common.white,
+    },
+  },
+  activeButtonLabel: {
+    color: theme.palette.primary.main,
   },
 }));
 

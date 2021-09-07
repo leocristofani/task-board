@@ -3,11 +3,13 @@ import { useLocation } from "react-router-dom";
 import React, { useContext, useEffect, useState } from "react";
 
 interface URLContextValue {
+  withoutParam: (key: string) => string;
   withParam: (key: string, value: string) => string;
   hasParam: (key: string, value: string) => boolean;
 }
 
 const defaultValue: URLContextValue = {
+  withoutParam: (_: string) => "",
   withParam: (_: string, __: string) => "",
   hasParam: (_: string, __: string) => false,
 };
@@ -24,8 +26,16 @@ export function URLProvider(props: URLProviderProps) {
 
   useEffect(() => {
     setState({
+      withoutParam: (key: string) => {
+        const parsedParams = queryString.parse(location.search);
+
+        delete parsedParams[key];
+
+        return `${location.pathname}?${queryString.stringify(parsedParams)}`;
+      },
       withParam: (key: string, value: string) => {
         const parsedParams = queryString.parse(location.search);
+
         parsedParams[key] = value;
 
         return `${location.pathname}?${queryString.stringify(parsedParams)}`;
