@@ -6,12 +6,14 @@ interface URLContextValue {
   withoutParam: (key: string) => string;
   withParam: (key: string, value: string) => string;
   hasParam: (key: string, value: string) => boolean;
+  getParam: (key: string) => string | undefined;
 }
 
 const defaultValue: URLContextValue = {
   withoutParam: (_: string) => "",
   withParam: (_: string, __: string) => "",
   hasParam: (_: string, __: string) => false,
+  getParam: (_: string) => "",
 };
 
 const URLContext = React.createContext(defaultValue);
@@ -44,6 +46,11 @@ export function URLProvider(props: URLProviderProps) {
         const parsedParams = queryString.parse(location.search);
 
         return parsedParams[key] === value;
+      },
+      getParam: (key: string) => {
+        const parsedParams = queryString.parse(location.search);
+
+        return parsedParams[key] as string | undefined;
       },
     });
   }, [location]);
