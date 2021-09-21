@@ -6,12 +6,23 @@ export default function makeTasksStateSelector(state: TasksState) {
     getMany: (filters: TaskFilters): Task[] =>
       Object.values(state)
         .filter((task: Task) =>
-          Object.keys(filters).reduce(
-            (_: boolean, filter: string) =>
-              task[filter as keyof Task] ===
-              filters[filter as keyof TaskFilters],
-            true
-          )
+          Object.keys(filters)
+            /**
+             * Filter out undefined filters
+             */
+            .filter((filter) => !!filters[filter as keyof TaskFilters])
+            /**
+             * Map to boolean array by comparing filters and task properties
+             */
+            .map(
+              (filter) =>
+                task[filter as keyof Task] ===
+                filters[filter as keyof TaskFilters]
+            )
+            /**
+             * Either all true of false
+             */
+            .reduce((acc, cur) => (!acc ? acc : cur), true)
         )
         .sort(byCreatedAt),
 
