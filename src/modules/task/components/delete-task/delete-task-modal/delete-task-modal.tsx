@@ -15,12 +15,18 @@ export default function DeleteTaskModal() {
   const history = useHistory();
   const params = useParams<{ taskId: string }>();
 
+  const tasksState = useTasksState();
+  const task = tasksState.getOne(params.taskId);
+
   const handleClose = () => {
     history.goBack();
   };
 
-  const taskBoardState = useTasksState();
-  const task = taskBoardState.getOne(params.taskId);
+  const handleDelete = () => {
+    tasksState.delete(params.taskId);
+
+    handleClose();
+  };
 
   if (!task) return <TaskNotFoundModal taskId={params.taskId} />;
 
@@ -31,7 +37,9 @@ export default function DeleteTaskModal() {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">Delete Task</DialogTitle>
+      <DialogTitle id="alert-dialog-title">
+        Delete Task: {task.title}
+      </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
           Are you sure you want to delete this task?
@@ -41,7 +49,7 @@ export default function DeleteTaskModal() {
         <Button onClick={handleClose} color="default">
           Cancel
         </Button>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleDelete} color="primary">
           Delete
         </Button>
       </DialogActions>
