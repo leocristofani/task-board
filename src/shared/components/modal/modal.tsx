@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogActions,
 } from "@material-ui/core";
+import useStyles from "./modal.styles";
 
 interface ModalProps {
   open: boolean;
@@ -22,16 +23,13 @@ export default function Modal({
   actions,
   onClose,
 }: ModalProps) {
+  const styles = useStyles();
+
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
-    >
+    <Dialog open={open} onClose={onClose} aria-labelledby="alert-dialog-title">
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>{children}</DialogContent>
-      <DialogActions>
+      <DialogActions className={styles.actions}>
         <Button onClick={onClose} color="default">
           Cancel
         </Button>
