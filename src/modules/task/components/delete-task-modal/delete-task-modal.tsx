@@ -7,9 +7,8 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@material-ui/core";
-
-import useTasksState from "../../../providers/tasks-state/use-tasks-state";
-import TaskNotFoundModal from "../../task-not-found-modal/task-not-found-modal";
+import useTasksState from "../../providers/tasks-state/use-tasks-state";
+import TaskNotFoundModal from "../task-not-found-modal/task-not-found-modal";
 
 export default function DeleteTaskModal() {
   const history = useHistory();
