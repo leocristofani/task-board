@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { ExpandMore } from "@material-ui/icons";
+import { ExpandMore, ExpandLess } from "@material-ui/icons";
 import {
   Card,
   CardHeader,
@@ -8,24 +7,26 @@ import {
   Collapse,
   CardContent,
   CardActions,
+  Chip,
 } from "@material-ui/core";
 
-import useStyles from "./task-board-card.styles";
-import { LinkButton } from "../../../../../shared/components/link-button/link-button";
 import { Task } from "../../../task-types";
+import useExpanded from "../../../hooks/use-expanded/use-expanded";
+import { LinkButton } from "../../../../../shared/components/link-button/link-button";
+import useTaskPrioritySettings from "../../../hooks/use-task-priority-settings/use-task-priority-settings";
 
-export interface TaskBoardCardPrpos {
+import useStyles from "./task-board-card.styles";
+
+export interface TaskBoardCardProps {
   task: Task;
 }
 
-export default function TaskBoardCard(props: TaskBoardCardPrpos) {
-  const classes = useStyles();
+export default function TaskBoardCard(props: TaskBoardCardProps) {
+  const { expanded, toggleExpanded } = useExpanded();
 
-  const [expanded, setExpanded] = useState(false);
+  const taskPrioritySettings = useTaskPrioritySettings(props.task.priority);
 
-  const toggleExpanded = () => {
-    setExpanded((prevExpanded) => !prevExpanded);
-  };
+  const classes = useStyles({ priorityColor: taskPrioritySettings.color });
 
   return (
     <Card className={classes.root}>
@@ -35,12 +36,18 @@ export default function TaskBoardCard(props: TaskBoardCardPrpos) {
         title={<Typography variant="body1">{props.task.title}</Typography>}
         action={
           <IconButton aria-label="open">
-            <ExpandMore />
+            {expanded ? <ExpandLess /> : <ExpandMore />}
           </IconButton>
         }
       />
       <Collapse in={expanded}>
         <CardContent className={classes.content}>
+          <Chip
+            size="small"
+            variant="outlined"
+            label={`${taskPrioritySettings.label} Priority`}
+            className={classes.priorityChip}
+          />
           <Typography variant="body1">{props.task.description}</Typography>
         </CardContent>
         <CardActions>
